@@ -2,17 +2,37 @@
 
 Last year this day's tweet
 
-##  
-1. How to setup a golang project 
-2. If there is a venv equivalent for GO - go mod init <projname>
-2. How to write a script
-3. How to compile and run it
-4. How to set env variable - https://towardsdatascience.com/use-environment-variable-in-your-next-golang-project-39e17c3aaa66
-4. Type of an object in Golang - https://stackoverflow.com/questions/20170275/how-to-find-the-type-of-an-object-in-go
-4. How to create  a for loop of objects
-4. We will use the twitter SDK in go to implement LYTDT
+## Prerequisite
 
+Twitter developer account and keys
 
+## How it works
 
+1. Setup the account 
 
-1
+- copy `.env_template` to `.env`
+- Add your twitter access token and consumer keys
+
+2. Setup [developer sandbox](https://developer.twitter.com/en/account/environments) for `Search Tweets Full Archive`, with value `searchText`
+
+2. Complie the code
+
+```
+go build main.go
+```
+
+2. Setup the Account
+
+```
+./main add <username>
+```
+
+> This will help you list the tweets next time without hassle
+
+3. List the tweets from last year
+
+```
+./main list
+```
+
+> Currently it lists all tweets with more than 10 likes
