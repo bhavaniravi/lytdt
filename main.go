@@ -12,6 +12,10 @@ import (
 )
 
 var filePath string = "/tmp/lytdt.txt"
+var errorMap = map[string]string{
+	"username":      "\n\nCannot list links without username\nuse `./main add <username>`\n",
+	"invalidOption": "\n\nChoose an option \n1. add\n2.list\n",
+}
 
 // How to load .env variables
 func setupEnv() {
@@ -83,12 +87,28 @@ func getTweets(username string) {
 
 func main() {
 	// Hey switch, welcome back after 4 years of Python
+	if len(os.Args) < 2 {
+		fmt.Println(errorMap["invalidOption"])
+		os.Exit(3)
+	}
+
 	switch command := os.Args[1]; command {
 	case "add":
+		if len(os.Args) < 3 {
+			fmt.Println(errorMap["username"])
+			os.Exit(3)
+		}
 		wrtieFile(os.Args[2])
 	case "list":
 		setupEnv()
 		username := readFromFile()
+		// unlike python validity checks are Arggh!
+		if username == "" && len(os.Args) < 3 {
+			fmt.Println(errorMap["username"])
+			os.Exit(3)
+		}
 		getTweets(username)
+	default:
+		fmt.Println(errorMap["invalidOption"])
 	}
 }
